@@ -13,10 +13,22 @@ class Name(Field):
 
 class Phone(Field):
     def __init__(self, value):
-        # Валідація формату телефону (10 цифр)
+        self._set_value(value)
+
+    def _set_value(self, value):
+        # Перевірка формату телефону (10 цифр)
         if not (isinstance(value, str) and value.isdigit() and len(value) == 10):
             raise ValueError("Invalid phone number format")
         super().__init__(value)
+
+    @property
+    def value(self):
+        return str(super().value)
+
+    @value.setter
+    def value(self, new_value):
+        self._set_value(new_value)
+
 
 class Birthday(Field):
     def __init__(self, value):

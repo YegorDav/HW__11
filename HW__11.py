@@ -20,12 +20,23 @@ class Phone(Field):
 
 class Birthday(Field):
     def __init__(self, value):
-        # Перевірка правильності формату та значення дня народження
+        self._set_value(value)
+
+    def _set_value(self, value):
         try:
             datetime.strptime(value, "%Y-%m-%d")
         except ValueError:
             raise ValueError("Invalid birthday format. Use YYYY-MM-DD.")
         super().__init__(value)
+
+    @property
+    def value(self):
+        return str(super().value)
+
+    @value.setter
+    def value(self, new_value):
+        self._set_value(new_value)
+
 
 class Record:
     def __init__(self, name, birthday=None):

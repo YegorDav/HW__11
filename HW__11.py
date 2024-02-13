@@ -25,7 +25,7 @@ class Phone(Field):
 
     @value.setter
     def value(self, new_value):
-        if not self.is_value(new_value):
+        if not self.is_valid(new_value):
             raise ValueError
         self.__value = new_value
 
@@ -47,7 +47,7 @@ class Birthday(Field):
 
     @value.setter
     def value(self, new_value):
-        if not self.is_value(new_value):
+        if not self.is_valid(new_value):
             raise ValueError
         self.__value = new_value
 

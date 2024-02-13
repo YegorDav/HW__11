@@ -34,8 +34,12 @@ class Birthday(Field):
     def __init__(self, value):
         self.value = value
 
-    def _set_value(self, value):
-        return datetime.strptime(value, "%Y-%m-%d")
+    def is_valid(self, value):
+        try:
+            datetime.strptime(value, '%d.%m.%Y')
+            return True
+        except ValueError:
+            return False
 
     @property
     def value(self):
